@@ -45,11 +45,8 @@ function numSwitcher(char, index){
       case '9':
         text = 'nine ';
         break;
-      case '0':
-        text = 'oh ';
-        break;
     }
-    if (text !== 'oh ') {
+    if (text !== '') {
       switch ( index ) {
         case 0:
         break;
@@ -58,6 +55,9 @@ function numSwitcher(char, index){
         break;
         case 3:
         text += 'thousand ';
+        break;
+        case 5:
+        text += 'hundred ';
         break;
       }
     }
@@ -95,10 +95,14 @@ function numSwitcher(char, index){
   return text;
 };
 
-function teenMaker(first, second){
+function pointMaker(number){
+  return number += ' point ';
+}
+
+function teenMaker(second){
   let teen = '';
   switch(second){
-    case 'oh ':
+    case '':
       teen = 'ten ';
       break;
     case 'one ':
@@ -141,6 +145,10 @@ function teenMaker(first, second){
 function numberToWord(number){
   let answerString = '';
   number = number.toString().split('');
+  if (number.includes('.')){
+    pointMaker(number[number.indexOf('.')+1]);
+    number.splice(number.indexOf('.'),1)
+  }
   let length = number.length;
   let word = [];
 
@@ -152,18 +160,25 @@ function numberToWord(number){
   // convert string number to text number
   word = word.map((char, i)=>numSwitcher(char, i));
 
+  // check for instances of teens in the thousands
+  if (word.length > 4 && word[4] === 'ten '){
+    const teenLang = teenMaker(word[3]);
+    console.log('teen word: ' + word[3]);
+    word.splice(3, 2, teenLang);
+    length = word.length;
+  };
+
   // check for instances of teens
   if (word.length > 1 && word[1] === 'ten '){
-    const teenLang = teenMaker(word[1],word[0]);
+    const teenLang = teenMaker(word[0]);
     word = word.slice(2);
     word.unshift(teenLang);
     length = word.length;
-  }
-
-  // reverse order to normal ltr
-  for (let i = 0; i < length; i++){
-    answerString += word.pop();
   };
+
+  // reverse order to normal ltr and join
+  answerString = word.reverse().join('');  
+  
   return answerString;
 };
 
@@ -173,7 +188,11 @@ function wordToNumber(word){
   return number;
 };
 
-console.log(numberToWord(123));
-
 console.log(numberToWord(13));
-console.log(numberToWord(419));
+console.log(numberToWord(411));
+console.log(numberToWord(9876));
+console.log(numberToWord(12019));
+console.log(numberToWord(516402));
+console.log(numberToWord(652049));
+console.log(numberToWord(4.3));
+
