@@ -96,8 +96,6 @@ function numSwitcher(char, index){
 };
 
 function teenMaker(first, second){
-  console.log(first);
-  console.log(second);
   let teen = '';
   switch(second){
     case 'oh ':
@@ -156,8 +154,10 @@ function numberToWord(number){
 
   // check for instances of teens
   if (word.length > 1 && word[1] === 'ten '){
-    console.log('teenmaker: ' + teenMaker(word[1],word[0]));
-    
+    const teenLang = teenMaker(word[1],word[0]);
+    word = word.slice(2);
+    word.unshift(teenLang);
+    length = word.length;
   }
 
   // reverse order to normal ltr
@@ -175,4 +175,5 @@ function wordToNumber(word){
 
 console.log(numberToWord(123));
 
-console.log(numberToWord(13))
+console.log(numberToWord(13));
+console.log(numberToWord(419));
