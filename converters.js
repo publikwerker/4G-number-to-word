@@ -136,34 +136,69 @@ function teenMaker(second){
   return teen;
 }
 
+function teenThousandMaker(second){
+  let teen = '';
+  switch(second){
+    case ' thousand ':
+      teen = 'ten ';
+      break;
+    case 'one thousand ':
+      teen = 'eleven thousand ';
+      break;
+    case 'two thousand ':
+      teen = 'twelve thousand';
+      break;
+    case 'three ':
+      teen = 'thirteen ';
+      break;
+    case 'four ':
+      teen = 'fourteen ';
+      break;
+    case 'five ':
+      teen = 'fifteen ';
+      break;
+    case 'six thousand ':
+      teen = 'sixteen thousand ';
+      break;
+    case 'seven ':
+      teen = 'seventeen ';
+      break;
+    case 'eight ':
+      teen = 'eighteen ';
+      break;
+    case 'nine ':
+      teen = 'nineteen ';
+      break;
+  }
+  return teen;
+}
+
+
 // capture number
 // convert to string
 // split string into chars
 // convert text to number
 // concat
 // return 
+
 function numberToWord(number){
   let answerString = '';
   number = number.toString().split('');
   if (number.includes('.')){
-    pointMaker(number[number.indexOf('.')+1]);
-    number.splice(number.indexOf('.'),1)
+    let location = number.indexOf('.');
+    let onesWithPoint = pointMaker(number[location+1]);
+    number.splice(number.indexOf('.'),2, onesWithPoint);
   }
-  let length = number.length;
-  let word = [];
-
+ 
   // reverse order to determine place value
-  for (let i = 0; i<length; i++){
-    word.push(number.pop());
-  };
+  let word = number.reverse();
 
   // convert string number to text number
   word = word.map((char, i)=>numSwitcher(char, i));
 
   // check for instances of teens in the thousands
   if (word.length > 4 && word[4] === 'ten '){
-    const teenLang = teenMaker(word[3]);
-    console.log('teen word: ' + word[3]);
+    const teenLang = teenThousandMaker(word[3]);
     word.splice(3, 2, teenLang);
     length = word.length;
   };
