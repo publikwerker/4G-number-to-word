@@ -39,7 +39,7 @@ def numSwitcher(char):
           3: 'thousand ',
           5: 'hundred ',
         }  
-        text = text + switcher2.get(index, "")
+        text = text + switcher2.get(index, " ")
   else:
     switcher = {
       '1': 'ten ',
@@ -52,7 +52,7 @@ def numSwitcher(char):
       '8': 'eighty ',
       '9': 'ninety ',
     }
-    text = switcher.get(num, '')
+    text = switcher.get(num, "")
   return text
 
 def decimalMaker(num):
@@ -86,23 +86,23 @@ def teenMaker(second):
     'eight ': 'eighteen ',
     'nine ': 'nineteen ',
   }
-  return switcher.get(second)
+  return switcher.get(second, "")
 
 
-def teenThousandMaker(second):
+def teenThousandMaker(fourth):
   switcher3 = {
-    ' thousand ': 'ten ',
+    ' ': 'ten thousand',
     'one thousand ': 'eleven thousand ',
     'two thousand ': 'twelve thousand',
-    'three thousand': 'thirteen ',
-    'four thousand': 'fourteen ',
-    'five thousand': 'fifteen ',
+    'three thousand': 'thirteen thousand',
+    'four thousand': 'fourteen thousand',
+    'five thousand': 'fifteen thousand',
     'six thousand ': 'sixteen thousand ',
-    'seven thousand': 'seventeen ',
-    'eight thousand': 'eighteen ',
-    'nine thousand': 'nineteen ',
+    'seven thousand': 'seventeen thousand',
+    'eight thousand': 'eighteen thousand',
+    'nine thousand': 'nineteen thousand',
   }
-  return switcher3.get(second)
+  return switcher3.get(fourth, "")
 
 def numberToWord(number):
   afterDecimal = ''
@@ -156,6 +156,7 @@ def numberToWord(number):
 print(numberToWord(13))
 print(numberToWord(411))
 print(numberToWord(9876))
+print(numberToWord(10000))
 print(numberToWord(12019))
 print(numberToWord(516402))
 print(numberToWord(4.3))
