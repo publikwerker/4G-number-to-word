@@ -94,13 +94,13 @@ def teenThousandMaker(second):
     ' thousand ': 'ten ',
     'one thousand ': 'eleven thousand ',
     'two thousand ': 'twelve thousand',
-    'three ': 'thirteen ',
-    'four ': 'fourteen ',
-    'five ': 'fifteen ',
+    'three thousand': 'thirteen ',
+    'four thousand': 'fourteen ',
+    'five thousand': 'fifteen ',
     'six thousand ': 'sixteen thousand ',
-    'seven ': 'seventeen ',
-    'eight ': 'eighteen ',
-    'nine ': 'nineteen ',
+    'seven thousand': 'seventeen ',
+    'eight thousand': 'eighteen ',
+    'nine thousand': 'nineteen ',
   }
   return switcher3.get(second)
 
