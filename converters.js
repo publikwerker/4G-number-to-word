@@ -1,6 +1,5 @@
 /* 
-Coding test:
-In Python, Write a number to word converter which takes in a number and returns that number in words.
+This is a number to word converter @numToWord which takes in a number and returns that number in words.
 
 For example:
 
@@ -9,7 +8,7 @@ Input: 4032, output four thousand thirty two
 Input: 87413, output eighty seven thousand four hundred thirteen
 Input 45.2, output forty five point two
 
-Write another method which does the exact opposite:
+Another function @wordToNumber does the exact opposite:
 
 Input: Ten Thousand Four Hundred Eighty Two, Output: 14082
 Input: Zero point Nine, Output 0.9 */
@@ -173,14 +172,6 @@ function teenThousandMaker(second){
   return teen;
 }
 
-
-// capture number
-// convert to string
-// split string into chars
-// convert text to number
-// concat
-// return 
-
 function numberToWord(number){
   let answerString = '';
   let afterDecimal = [];
@@ -227,8 +218,8 @@ function numberToWord(number){
 };
 
 function wordToNumber(word){
-
-
+// make word bank an object and check words against key value
+// this would speed translation and allow for validation of input later
   return number;
 };
 
