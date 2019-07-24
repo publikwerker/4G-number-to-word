@@ -135,11 +135,11 @@ function teenMaker(second){
   return teen;
 }
 
-function teenThousandMaker(second){
+function teenThousandMaker(fourth){
   let teen = '';
-  switch(second){
-    case ' thousand ':
-      teen = 'ten ';
+  switch(fourth){
+    case '':
+      teen = 'ten thousand ';
       break;
     case 'one thousand ':
       teen = 'eleven thousand ';
@@ -148,25 +148,25 @@ function teenThousandMaker(second){
       teen = 'twelve thousand';
       break;
     case 'three ':
-      teen = 'thirteen ';
+      teen = 'thirteen thousand';
       break;
     case 'four ':
-      teen = 'fourteen ';
+      teen = 'fourteen thousand';
       break;
     case 'five ':
-      teen = 'fifteen ';
+      teen = 'fifteen thousand';
       break;
     case 'six thousand ':
       teen = 'sixteen thousand ';
       break;
     case 'seven ':
-      teen = 'seventeen ';
+      teen = 'seventeen thousand';
       break;
     case 'eight ':
-      teen = 'eighteen ';
+      teen = 'eighteen thousand';
       break;
     case 'nine ':
-      teen = 'nineteen ';
+      teen = 'nineteen thousand';
       break;
   }
   return teen;
@@ -196,6 +196,8 @@ function numberToWord(number){
   // check for instances of teens in the thousands
   if (word.length > 4 && word[4] === 'ten '){
     const teenLang = teenThousandMaker(word[3]);
+    console.log(word);
+    console.log(teenLang);
     word.splice(3, 2, teenLang);
     length = word.length;
   };
@@ -223,14 +225,14 @@ function wordToNumber(word){
   return number;
 };
 
-console.log(numberToWord(13));
-console.log(numberToWord(411));
-console.log(numberToWord(9876));
-console.log(numberToWord(12019));
-console.log(numberToWord(516402));
-console.log(numberToWord(652049));
-console.log(numberToWord(4.3));
-console.log(numberToWord(42.19));
-console.log(numberToWord(3.1415926535));
-console.log(numberToWord(10000));
+// console.log(numberToWord(13));
+// console.log(numberToWord(411));
+// console.log(numberToWord(9876));
+// console.log(numberToWord(12019));
+// console.log(numberToWord(516402));
+// console.log(numberToWord(652049));
+// console.log(numberToWord(4.3));
+// console.log(numberToWord(42.19));
+// console.log(numberToWord(3.1415926535));
+console.log(numberToWord(210000));
 
