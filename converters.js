@@ -183,7 +183,7 @@ function teenThousandMaker(second){
 
 function numberToWord(number){
   let answerString = '';
-  let afterDecimal = '';
+  let afterDecimal = [];
 
   // stringify number and turn into an array
   number = number.toString().split('');
@@ -200,7 +200,7 @@ function numberToWord(number){
  
   // convert string number to text number
   word = word.map((char, i)=>numSwitcher(char, i));
-  afterDecimal = afterDecimal.map((char, i)=>numSwitcher(char, i));
+  afterDecimal = afterDecimal.map((char)=>numSwitcher(char, 0));
 
   // check for instances of teens in the thousands
   if (word.length > 4 && word[4] === 'ten '){
@@ -241,4 +241,5 @@ console.log(numberToWord(652049));
 console.log(numberToWord(4.3));
 console.log(numberToWord(42.19));
 console.log(numberToWord(3.1415926535));
+console.log(numberToWord(10000));
 
