@@ -88,7 +88,7 @@ function numSwitcher(char, index){
         text = 'eighty ';
         break;
       case '9':
-        text = 'niney ';
+        text = 'ninety ';
         break;
     }
   }
@@ -183,18 +183,24 @@ function teenThousandMaker(second){
 
 function numberToWord(number){
   let answerString = '';
+  let afterDecimal = '';
+
+  // stringify number and turn into an array
   number = number.toString().split('');
-  if (number.includes('.')){
-    let location = number.indexOf('.');
-    let onesWithPoint = pointMaker(number[location+1]);
-    number.splice(number.indexOf('.'),2, onesWithPoint);
-  }
- 
+  
   // reverse order to determine place value
   let word = number.reverse();
 
+  // check for decimal
+  if (word.includes('.')){
+    let location = word.indexOf('.');
+    afterDecimal = word.slice(0,location).reverse();
+    word = word.slice(location+1);
+  }
+ 
   // convert string number to text number
   word = word.map((char, i)=>numSwitcher(char, i));
+  afterDecimal = afterDecimal.map((char, i)=>numSwitcher(char, i));
 
   // check for instances of teens in the thousands
   if (word.length > 4 && word[4] === 'ten '){
@@ -213,8 +219,11 @@ function numberToWord(number){
 
   // reverse order to normal ltr and join
   answerString = word.reverse().join('');  
+  afterDecimal = afterDecimal.join('');
   
-  return answerString;
+  if (afterDecimal.length > 0){
+    return `${answerString}point ${afterDecimal}`;
+  } else return answerString;
 };
 
 function wordToNumber(word){
@@ -230,4 +239,6 @@ console.log(numberToWord(12019));
 console.log(numberToWord(516402));
 console.log(numberToWord(652049));
 console.log(numberToWord(4.3));
+console.log(numberToWord(42.19));
+console.log(numberToWord(3.1415926535));
 
