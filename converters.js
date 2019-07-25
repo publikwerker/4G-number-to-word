@@ -145,28 +145,28 @@ function teenThousandMaker(fourth){
       teen = 'eleven thousand ';
       break;
     case 'two thousand ':
-      teen = 'twelve thousand';
+      teen = 'twelve thousand ';
       break;
     case 'three ':
-      teen = 'thirteen thousand';
+      teen = 'thirteen thousand ';
       break;
     case 'four ':
-      teen = 'fourteen thousand';
+      teen = 'fourteen thousand ';
       break;
     case 'five ':
-      teen = 'fifteen thousand';
+      teen = 'fifteen thousand ';
       break;
     case 'six thousand ':
       teen = 'sixteen thousand ';
       break;
     case 'seven ':
-      teen = 'seventeen thousand';
+      teen = 'seventeen thousand ';
       break;
     case 'eight ':
-      teen = 'eighteen thousand';
+      teen = 'eighteen thousand ';
       break;
     case 'nine ':
-      teen = 'nineteen thousand';
+      teen = 'nineteen thousand ';
       break;
   }
   return teen;
@@ -196,8 +196,6 @@ function numberToWord(number){
   // check for instances of teens in the thousands
   if (word.length > 4 && word[4] === 'ten '){
     const teenLang = teenThousandMaker(word[3]);
-    console.log(word);
-    console.log(teenLang);
     word.splice(3, 2, teenLang);
     length = word.length;
   };
@@ -223,6 +221,7 @@ function numberToWord(number){
 // and check words against key value to speed translation
 // and allow for validation of input later
 const wordBank = {
+  "point": '.',
   "oh": 0,
   "zero": 0,
   "one": 1,
@@ -257,12 +256,8 @@ const wordBank = {
 };
 
 function addNumber(number, i = 0, total = 0){
-  console.log(`i is ${i}`);
-  console.log(`number is ${number}`);
   if (number.length > 1){
-    console.log('number length is greater than one');
     if ( i >= number.length ) {
-      console.log('there are no more');
       return total;
     } else   
     if (number[i] > total && total !== 0) {
@@ -272,22 +267,17 @@ function addNumber(number, i = 0, total = 0){
     } else
     // if this is the last number in the array
     if (!number[i+1]){
-      console.log('this is the last one');
       total += number[i];
       return total;
     } else
     // if this number is smaller than the next
     if ( number[i] < number[i+1] ){
-      console.log('this number is smaller than the next');
       total += (number[i]*number[i+1]);
       i+=2;
       return addNumber(number, i, total);
     } else
     // if this number is larger than the next
-    console.log(number[i]);
-    console.log(number[i+1]);
     if (number[i] > number[i+1]){
-      console.log('this number is larger than the next');
       total += (number[i]+number[i+1]);
       i+=2;
       return addNumber(number, i, total);
@@ -298,27 +288,42 @@ function addNumber(number, i = 0, total = 0){
   } else return number;
 }
 
+function makeDecimal(array){
+  let returnValue = [];
+  for (value of array){
+    returnValue.push(wordBank[value]);
+  }
+  return returnValue.join('');
+}
+
 function wordToNumber(word){
   let number = [];
+  let decimalNum = [];
   word = word.split(' ');
-  console.log(`word is ${word}`);
+  // if word contains a decimal
+  if (word.includes('point')) {
+    // remove decimal and everything after
+    decimalNum = word.slice(word.indexOf('point'), word.length);
+    word = word.slice(0,word.indexOf('point'));
+    decimalNum = makeDecimal(decimalNum);
+  }
   for (words in word){
     number.push(wordBank[word[words]]);
   }
 
-  return addNumber(number);
+  return addNumber(number)+decimalNum;
 }
 
-// console.log(numberToWord(13));
-// console.log(numberToWord(411));
-// console.log(numberToWord(9876));
-// console.log(numberToWord(12019));
-// console.log(numberToWord(516402));
-// console.log(numberToWord(652049));
-// console.log(numberToWord(4.3));
-// console.log(numberToWord(42.19));
-// console.log(numberToWord(3.1415926535));
-// console.log(numberToWord(210000));
+console.log(numberToWord(13));
+console.log(numberToWord(411));
+console.log(numberToWord(9876));
+console.log(numberToWord(12019));
+console.log(numberToWord(516402));
+console.log(numberToWord(652049));
+console.log(numberToWord(4.3));
+console.log(numberToWord(42.19));
+console.log(numberToWord(3.1415926535));
+console.log(numberToWord(210000));
 
 console.log(wordToNumber('one'));
 console.log(wordToNumber('fifty five'));
@@ -326,3 +331,4 @@ console.log(wordToNumber('one hundred'));
 console.log(wordToNumber('two hundred ten'));
 console.log(wordToNumber('one thousand nine hundred seventy four'));
 console.log(wordToNumber('one hundred thousand'));
+console.log(wordToNumber('twenty nine point seven three'));
