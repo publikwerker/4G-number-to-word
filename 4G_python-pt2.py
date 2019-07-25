@@ -15,6 +15,8 @@
 
 def wordBank(word):
   switcher = {
+    "zero": 0,
+    "oh": 0,
     "one": 1,
     "two": 2,
     "three": 3,
@@ -51,6 +53,7 @@ def wordBank(word):
 def wordToNumber(word):
   word = word.split()
   number = map(wordBank, word)
+
   
   return number
 

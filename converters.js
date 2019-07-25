@@ -219,11 +219,95 @@ function numberToWord(number){
   } else return answerString;
 };
 
-function wordToNumber(word){
-// make word bank an object and check words against key value
-// this would speed translation and allow for validation of input later
-  return number;
+// for the second part, there is a word bank object
+// and check words against key value to speed translation
+// and allow for validation of input later
+const wordBank = {
+  "oh": 0,
+  "zero": 0,
+  "one": 1,
+  "two": 2,
+  "three": 3,
+  "four": 4,
+  "five": 5,
+  "six": 6,
+  "seven": 7,
+  "eight": 8,
+  "nine": 9,
+  "ten": 10,
+  "eleven": 11,
+  "twelve": 12,
+  "thirteen": 13,
+  "fourteen": 14,
+  "fifteen": 15,
+  "sixteen": 16,
+  "seventeen": 17,
+  "eighteen": 18,
+  "nineteen": 19,
+  "twenty": 20,
+  "thirty": 30,
+  "forty": 40,
+  "fifty": 50,
+  "sixty": 60,
+  "seventy": 70,
+  "eighty": 80,
+  "ninety": 90,
+  "hundred": 100,
+  "thousand": 1000,
 };
+
+function addNumber(number, i = 0, total = 0){
+  console.log(`i is ${i}`);
+  console.log(`number is ${number}`);
+  if (number.length > 1){
+    console.log('number length is greater than one');
+    if ( i >= number.length ) {
+      console.log('there are no more');
+      return total;
+    } else   
+    if (number[i] > total && total !== 0) {
+      total *= number[i];
+      i++;
+      return addNumber(number, i, total);
+    } else
+    // if this is the last number in the array
+    if (!number[i+1]){
+      console.log('this is the last one');
+      total += number[i];
+      return total;
+    } else
+    // if this number is smaller than the next
+    if ( number[i] < number[i+1] ){
+      console.log('this number is smaller than the next');
+      total += (number[i]*number[i+1]);
+      i+=2;
+      return addNumber(number, i, total);
+    } else
+    // if this number is larger than the next
+    console.log(number[i]);
+    console.log(number[i+1]);
+    if (number[i] > number[i+1]){
+      console.log('this number is larger than the next');
+      total += (number[i]+number[i+1]);
+      i+=2;
+      return addNumber(number, i, total);
+    };
+    return total;
+
+  // if this is the only number in the array
+  } else return number;
+}
+
+function wordToNumber(word){
+  let number = [];
+  word = word.split(' ');
+  console.log(`word is ${word}`);
+  for (words in word){
+    number.push(wordBank[word[words]]);
+  }
+
+  return addNumber(number);
+}
 
 // console.log(numberToWord(13));
 // console.log(numberToWord(411));
@@ -234,5 +318,11 @@ function wordToNumber(word){
 // console.log(numberToWord(4.3));
 // console.log(numberToWord(42.19));
 // console.log(numberToWord(3.1415926535));
-console.log(numberToWord(210000));
+// console.log(numberToWord(210000));
 
+console.log(wordToNumber('one'));
+console.log(wordToNumber('fifty five'));
+console.log(wordToNumber('one hundred'));
+console.log(wordToNumber('two hundred ten'));
+console.log(wordToNumber('one thousand nine hundred seventy four'));
+console.log(wordToNumber('one hundred thousand'));
