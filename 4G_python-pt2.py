@@ -50,16 +50,21 @@ def wordBank(word):
   }
   return switcher.get(word)
 
+def decConsolidator(decimal):
+  numString = ["."]
+  for digit in decimal:
+    numString += str(wordBank(digit))
+  consolidated = "".join(numString)
+  return consolidated
 
-def wordToNumber(word):
-  word = word.split()
-  number = map(wordBank, word)
+def numConsolidator(number):
   previous = -1
   total = 0
   for num in number:
     # if the list has only one item
     if len(number) == 1:
-      return num
+      previous = int(num)
+      continue
     if previous == -1:
       previous = num
       continue
@@ -72,12 +77,36 @@ def wordToNumber(word):
       previous=-1
       continue
   if previous != -1:
-    total+=previous  
+    total += previous  
 
   return total
 
-print(wordToNumber('three'))
-print(wordToNumber('nineteen'))
-print(wordToNumber('two hundred ten'))
-print(wordToNumber('five hundred sixty seven'))
-print(wordToNumber("one thousand seven hundred seventy six"))
+def wordToNumber(word):
+  decimal = 0
+  #word = word.split()
+  if "point" in word:
+    print("there is a point")
+    both = word.split(" point ")
+    word = both[0].split()
+    decimal = both[1].split()
+  else:
+    word = word.split()
+    decimal = 0
+  
+  if decimal != 0:
+    decimal = decConsolidator(decimal)
+  number = map(wordBank, word)
+  integers = numConsolidator(number)
+  grandTotal = integers + float(decimal)
+
+  return grandTotal
+
+# print(wordToNumber("three"))
+# print(wordToNumber("nineteen"))
+# print(wordToNumber("forty two"))
+# print(wordToNumber("two hundred ten"))
+# print(wordToNumber("five hundred sixty seven"))
+# print(wordToNumber("one thousand seven hundred seventy six"))
+print(wordToNumber("eight point seven"))
+#print(wordToNumber("one oh three point four"))
+print(wordToNumber("ninety nine point nine nine"))
