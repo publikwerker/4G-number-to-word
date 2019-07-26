@@ -15,6 +15,7 @@
 
 def wordBank(word):
   switcher = {
+    "point": '.',
     "zero": 0,
     "oh": 0,
     "one": 1,
@@ -53,9 +54,24 @@ def wordBank(word):
 def wordToNumber(word):
   word = word.split()
   number = map(wordBank, word)
+  previous = -1
+  total = 0
+  for num in number:
+    if len(number) == 1:
+      return num
+    if previous == -1:
+      previous = num
+      continue
+    if num > previous:
+      total += (num*previous)
+      previous=-1
+      continue
+    if num < previous:
+      total+=(num+previous)
+      previous=-1
+      continue
 
-  
-  return number
+  return total
 
 print(wordToNumber('three'))
 print(wordToNumber('nineteen'))
