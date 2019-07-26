@@ -57,6 +57,7 @@ def wordToNumber(word):
   previous = -1
   total = 0
   for num in number:
+    # if the list has only one item
     if len(number) == 1:
       return num
     if previous == -1:
@@ -70,9 +71,13 @@ def wordToNumber(word):
       total+=(num+previous)
       previous=-1
       continue
+  if previous != -1:
+    total+=previous  
 
   return total
 
 print(wordToNumber('three'))
 print(wordToNumber('nineteen'))
+print(wordToNumber('two hundred ten'))
 print(wordToNumber('five hundred sixty seven'))
+print(wordToNumber("one thousand seven hundred seventy six"))
